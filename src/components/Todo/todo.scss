@@ -1,0 +1,17 @@
+.todo_list_item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 20px;
+    p{
+      font-weight: 300;
+    }
+    h4{
+        font-weight: 700;
+    }
+}
+
+.disabled_todo{
+    background-color: #ccc;    
+}
