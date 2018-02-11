@@ -1,17 +1,24 @@
-.todo_list_item{
+.card_wrapper {
+  .card_item{
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: 'Roboto', sans-serif;
     padding: 10px 20px;
+    margin: 0 0 20px 0;
     p{
       font-weight: 300;
     }
     h4{
-        font-weight: 700;
+      font-weight: 700;
     }
+    img{
+      height: 200px;
+      width: 250px;
+    }
+  }
 }
 
 .disabled_todo{
-    background-color: #ccc;    
+    background-color: #ccc;
 }

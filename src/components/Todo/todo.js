@@ -1,19 +1,19 @@
 import React from 'react';
-import {ListGroupItem} from 'reactstrap'
+import {ListGroupItem, Card, CardImg, CardBody, Button } from 'reactstrap'
 import styles from './todo.scss';
 
-const todo = (props) => {      
-         
+const todo = (props) => {
     return (
-        <ListGroupItem className={styles.todo_list_item + " " + (props.todo.status ? styles.disabled_todo : '')}>
-            <button type="button" onClick={() => props.delete(props.todo.id)}>Delete</button>
-            <div>
-                <h4>{props.todo.name}</h4>
-                <p>{props.todo.body}</p>
-            </div>            
-            <input type="checkbox" checked={props.todo.status} onChange={() => props.check(props.todo)} disabled={props.todo.status}/>           
-        </ListGroupItem>
-
+      <div className={styles.card_wrapper}>
+        <Card className={styles.card_item}>
+          <CardImg top width="100%" src={props.todo.image[0]} alt="Card image cap" />
+          <CardBody>
+            <h4>{props.todo.name}</h4>
+            <p>{props.todo.body}</p>
+            <Button onClick={() => props.delete(props.todo.id, props.todoIndex)}>Button</Button>
+          </CardBody>
+        </Card>
+      </div>
     );
 }
 
