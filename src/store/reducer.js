@@ -1,7 +1,7 @@
 import * as actionTypes from './actions';
 
 const initialState ={
-  todos: null
+  loadAllTodo: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +25,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         todos: [...newArr]
       }
+    case actionTypes.LOAD_ALL_TODOS: {
+      return {
+        ...state,
+        todos: [...action.todos]
+      }
+    }
     default:
       return {
         state

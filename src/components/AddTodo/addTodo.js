@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Col, Row, Button, Form, Label, Input, FormGroup } from 'reactstrap';
+import { Field, reduxForm } from 'redux-form';
 
 import styles from './addTodo.scss';
 
@@ -37,7 +38,7 @@ const addTodo = (props) => {
                              onChange={(event) =>  todoImage = event.target.files[0]}
                              placeholder="Todo Name" />
                         </div>
-                        <Button color="success" onClick={() => {
+                        <Button color="primary" onClick={() => {
                             props.addNewTodo(nameInput, descriptionInput, todoImage);
                             nameInput.value = null;
                             descriptionInput.value = null;

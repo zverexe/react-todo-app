@@ -1,6 +1,6 @@
-
+import * as firebase from 'firebase';
   // Initialize Firebase
-const db_config = {
+  let config = {
     apiKey: "AIzaSyALtlPVAq2PLYiXF3CT_EFFs9210VCPcvo",
     authDomain: "react-todo-app-4b652.firebaseapp.com",
     databaseURL: "https://react-todo-app-4b652.firebaseio.com",
@@ -8,5 +8,8 @@ const db_config = {
     storageBucket: "react-todo-app-4b652.appspot.com",
     messagingSenderId: "535168616242"
   };
- 
-  export default db_config;
+
+  firebase.initializeApp(config);
+
+  export const database = firebase.database();
+  export const storage = firebase.storage().ref();

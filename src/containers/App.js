@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
+import { Button } from 'reactstrap';
 
 import logo from '../logo.svg';
 import styles from './App.scss';
 
 import AddTodo from '../components/AddTodo/addTodo';
 import TodoList from '../components/TodoList/todoList';
+import Spinner from '../components/Spinner/spinner';
 import * as actionCreators from '../store/actions';
 
 
@@ -62,16 +63,23 @@ class App extends Component {
     });
   }
 
+  handleAllTodos() {
+    this.props.loadAll();
+  }
+
   render() {
     let list = null;
-    console.log(this.props.todos);
     if (this.props.todos) {
       list = <TodoList todoList={this.props.todos} checkTodo={this.handleCheckTodo} deleteTodo={this.handleDeleteTodo} />
+    } else {
+      list = <Spinner />;
     }
+
     return (
       <div className={styles.App}>
         <AddTodo addNewTodo={this.handleAddTodo} />
         {list}
+        <Button color="success" onClick={this.handleAllTodos}>Load All</Button>
       </div>
     );
   }
@@ -79,7 +87,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos
+    todos: state.todos,
+    load: state.loadAllTodo
   }
 }
 
@@ -87,7 +96,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadTodos: () => dispatch (actionCreators.loadDbTodos()),
     deleteToDo: (id, index) => dispatch (actionCreators.removeDbTodo(id, index)),
-    addTodo: (todoName, todoDesription, picture) => dispatch(actionCreators.addDbTodo(todoName, todoDesription, picture))
+    addTodo: (todoName, todoDesription, picture) => dispatch(actionCreators.addDbTodo(todoName, todoDesription, picture)),
+    loadAll: () => dispatch (actionCreators.loadAllTodo())
   }
 }
 
