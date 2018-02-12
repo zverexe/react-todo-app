@@ -20,5 +20,16 @@
 }
 
 .disabled_todo{
-    background-color: #ccc;
+  background-color: #ccc;
+}
+
+@media (max-width: 767px) {
+  .card_wrapper{
+    .card_item{
+      img{
+        height: auto;
+        width: 100%;
+      }
+    }
+  }
 }

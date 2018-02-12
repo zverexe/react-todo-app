@@ -1,6 +1,5 @@
-import axios from 'axios';
 import * as firebase from 'firebase';
-import { database } from '../config/config';
+import { database, storage } from '../config/config';
 
 export const ADD_TODO = 'ADD_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
@@ -52,10 +51,12 @@ export const loadDbTodos = () => {
     db.on('value', (snapshot) => {
       const data = snapshot.val();
       const newData = [];
-      Object.keys(data).forEach((key) => {
-        data[key].id = key;
-        newData.push(data[key]);
-      });
+      if (data) {
+        Object.keys(data).forEach((key) => {
+          data[key].id = key;
+          newData.push(data[key]);
+        });
+      }
       dispatch(initTodos(newData));
     });
   }
@@ -77,44 +78,29 @@ export const loadAllTodo = () => {
 }
 
 export const addDbTodo = (todoName, todoDesription, picture) => {
+  const db = database.ref().child('todos/');
+
+  const storeTodo = (todo) => {
+    db.push(todo).then( () => {
+      console.log('Success');
+    }).catch( () => {
+      console.log('Failed');
+    });
+  }
+  const storageRef = storage.ref();
   return dispatch => {
     const todo = {
       name: todoName.value,
       body: todoDesription.value,
       status: false
     }
-    const db = database.ref().child('todos');
-    db.push().set(todo);
-    
-      
-      dispatch(addTodo(todo));
-  
-  /*const storeTodo = (todo) => {
-    const db = database.ref().child('todos');
-    db.on('child_added', (snapshot) => {
-
-      let data = JSON.parse(res.config.data);
-        data.id = res.data.name;
-        dispatch(addTodo(data));
-    });
-  }*/
-  /*return dispatch => {
-    const todo = {
-      name: todoName.value,
-      body: todoDesription.value,
-      status: false
-    }
-    console.log(picture);
-
-    /*firebaseStorage.child(`image/${new Date().getTime()}`).put(picture).then((snapshot) => {
-      todo.image = snapshot.metadata.downloadURLs;
-      axios.post('https://react-todo-app-4b652.firebaseio.com/todos.json', todo).then(res => {
-        let data = JSON.parse(res.config.data);
-        data.id = res.data.name;
-        dispatch(addTodo(data))
-      }).catch(err => {
-        console.log(err);
+    if (picture) {
+      storageRef.child(`image/${new Date().getTime()}`).put(picture).then( snapshot => {
+        todo.image = snapshot.metadata.downloadURLs;
+        storeTodo(todo);
       });
-    });*/
+    } else {
+      storeTodo(todo);
+    }
   }
 }

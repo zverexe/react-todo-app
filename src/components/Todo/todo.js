@@ -1,5 +1,5 @@
 import React from 'react';
-import {ListGroupItem, Card, CardImg, CardBody, Button } from 'reactstrap';
+import { Card, CardImg, CardBody, Button } from 'reactstrap';
 import styles from './todo.scss';
 
 const todo = (props) => {

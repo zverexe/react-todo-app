@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Button } from 'reactstrap';
 
-import logo from '../logo.svg';
 import styles from './App.scss';
 
 import AddTodo from '../components/AddTodo/addTodo';

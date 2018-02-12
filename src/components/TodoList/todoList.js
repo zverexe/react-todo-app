@@ -1,8 +1,7 @@
 import React from 'react';
 import Todo from '../Todo/todo';
-import { Container, Row, Col, Button, ListGroup } from 'reactstrap';
+import { Container, Col } from 'reactstrap';
 import styles from './todoList.scss';
-
 
 const todoList = (props) => {
   const todoItem = props.todoList.map((todo, index) => {

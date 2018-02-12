@@ -12,4 +12,4 @@ import * as firebase from 'firebase';
   firebase.initializeApp(config);
 
   export const database = firebase.database();
-  export const storage = firebase.storage().ref();
+  export const storage = firebase.storage();
