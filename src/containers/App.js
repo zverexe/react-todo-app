@@ -17,6 +17,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+
+    const three = 3;
+    this.state = {
+      showButton: true
+    }
   }
 
   componentDidMount() {
@@ -30,7 +35,16 @@ class App extends Component {
         data.push(res.data[key]);
 			});
 			return data;
-	}
+  }
+
+  handlFirstTodos() {
+    return this.props.todos.map( (item, index) => {
+      if (index === this.three && this.state.showButton) {
+
+      }
+      return item;
+    })
+  }
 
   handleAddTodo(todoName, todoDesription, picture) {
     this.props.addTodo(todoName, todoDesription, picture);
@@ -40,45 +54,33 @@ class App extends Component {
     this.props.deleteToDo(id, index);
   }
 
-  handleCheckTodo(todo) {
-    const newtodo = {
-			id: todo.id,
-      name: todo.name,
-      body: todo.body,
-      status: true
-		};
-    axios.put(`https://react-todo-app-4b652.firebaseio.com/todos/${todo.id}.json`, newtodo).then(res => {
-			console.log(res);
-			this.state.todos.forEach((item, index) => {
-				if(item.id === res.data.id){
-					this.state.todos.splice(index, 1);
-					this.setState({
-						todos: [res.data, ...this.state.todos]
-					});
-				}
-			});
-    }).catch(err => {
-      console.log(err);
-    });
-  }
-
   handleAllTodos() {
     this.props.loadAll();
+
+    this.setState({showButton: false});
+  }
+
+  getLoadAllButton () {
+    const {todos} = this.props;
+    const {showButton} = this.state;
+    const isTodosLoaded = todos && todos.length;
+    if (isTodosLoaded && showButton) return <Button color="success" onClick={this.handleAllTodos}>Load All</Button>;
   }
 
   render() {
+    let {todos} = this.props;
     let list = null;
-    if (this.props.todos) {
+    if (todos && todos.length) {
       list = <TodoList todoList={this.props.todos} checkTodo={this.handleCheckTodo} deleteTodo={this.handleDeleteTodo} />
     } else {
-      list = <Spinner />;
+      list = <Spinner />
     }
 
     return (
       <div className={styles.App}>
         <AddTodo addNewTodo={this.handleAddTodo} />
         {list}
-        <Button color="success" onClick={this.handleAllTodos}>Load All</Button>
+        {this.getLoadAllButton()}
       </div>
     );
   }

@@ -42,12 +42,15 @@ export const removeDbTodo = (id, index) => {
     db.on('child_removed', () => {
       dispatch(removeTodo(index));
     });
+    db.on('value', (snapshot) => {
+      console.log(snapshot);
+    });
   }
 }
 
 export const loadDbTodos = () => {
   return dispatch => {
-    const db = database.ref().child('todos').limitToFirst(3);
+    const db = database.ref().child('todos');
     db.on('value', (snapshot) => {
       const data = snapshot.val();
       const newData = [];

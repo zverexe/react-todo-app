@@ -1,3 +1,6 @@
+.loader_wrapper {
+  position: relative;
+}
 #loader {
   position: absolute;
   top: 70%;
@@ -75,5 +78,17 @@
   }
   100% {
     transform: translate(0, -1em) rotate(-225deg);
+  }
+}
+
+@media (max-width: 767px) {
+  #loader{
+    top: 90%;
+  }
+}
+
+@media (max-width: 500px) {
+  #loader{
+    top: 100%;
   }
 }

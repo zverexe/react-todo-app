@@ -12,7 +12,7 @@ const addTodo = (props) => {
         <Container>
             <Col sm="12">
                 <div className={styles.add_todo_wrapper}>
-                <h1>Add Todo</h1>
+                <h3>Add Todo</h3>
                 <Form className={styles.newPost}>
 									<div className="form-group">
 										<label htmlFor="exampleInputPassword1">Todo title</label>
