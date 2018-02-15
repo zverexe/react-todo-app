@@ -33,7 +33,7 @@ const addTodo = (props) => {
 										</textarea>
                     </div>
                     <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Todo title</label>
+                    <label htmlFor="exampleInputPassword1">Todo image</label>
                     <input type="file" name="picture" className="form-control"
                         ref={ node => imageRef = node }
                          onChange={(event) =>  todoImage = event.target.files[0]}
