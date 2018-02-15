@@ -6,11 +6,6 @@ const initialState ={
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_TODO:
-      return {
-        ...state,
-        todos: [action.todo, ...state.todos]
-      }
     case actionTypes.INIT_TODOS:
       return {
         ...state,

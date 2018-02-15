@@ -7,13 +7,6 @@ export const INIT_TODOS = 'INIT_TODOS';
 export const LOAD_DB_TODOS = 'LOAD_DB_TODOS';
 export const LOAD_ALL_TODOS = 'LOAD_ALL_TODOS';
 
-export const addTodo = (data) => {
-  return {
-    type: ADD_TODO,
-    todo: data
-  }
-};
-
 export const removeTodo = (index) => {
   return {
     type: REMOVE_TODO,
@@ -50,7 +43,7 @@ export const removeDbTodo = (id, index) => {
 
 export const loadDbTodos = () => {
   return dispatch => {
-    const db = database.ref().child('todos');
+    const db = database.ref().child('todos').limitToFirst(3);
     db.on('value', (snapshot) => {
       const data = snapshot.val();
       const newData = [];

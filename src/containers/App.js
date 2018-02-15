@@ -28,15 +28,6 @@ class App extends Component {
     this.props.loadTodos();
 	}
 
-	getNewData(res) {
-		const data = [];
-      Object.keys(res.data).forEach(function (key, index) {
-        res.data[key].id = key;
-        data.push(res.data[key]);
-			});
-			return data;
-  }
-
   handlFirstTodos() {
     return this.props.todos.map( (item, index) => {
       if (index === this.three && this.state.showButton) {
@@ -56,7 +47,6 @@ class App extends Component {
 
   handleAllTodos() {
     this.props.loadAll();
-
     this.setState({showButton: false});
   }
 
