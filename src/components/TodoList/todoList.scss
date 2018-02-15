@@ -1,10 +1,16 @@
-.todo_list{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  flex: 0 1 calc(25% - 1em);
+.todo_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 }
 
-.list{
+.list {
   align-items: center
+}
+
+@media (max-width: 767px) {
+  .todo_list {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
 }
