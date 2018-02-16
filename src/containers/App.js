@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { Button } from 'reactstrap';
 
 import styles from './App.scss';
@@ -11,6 +10,7 @@ import TodoList from '../components/TodoList/todoList';
 import Spinner from '../components/Spinner/spinner';
 import * as actionCreators from '../store/actions';
 
+const LIMIT = 3;
 
 class App extends Component {
 
@@ -18,9 +18,8 @@ class App extends Component {
     super(props);
     autoBind(this);
 
-    const three = 3;
     this.state = {
-      showButton: true
+      allLoaded: false
     }
   }
 
@@ -28,13 +27,14 @@ class App extends Component {
     this.props.loadTodos();
 	}
 
-  handlFirstTodos() {
-    return this.props.todos.map( (item, index) => {
-      if (index === this.three && this.state.showButton) {
-
-      }
-      return item;
-    })
+  componentWillReceiveProps (nextProps) {
+    const {allLoaded} = this.state;
+    const {todos} = nextProps;
+    if (todos && todos.length <= LIMIT && !allLoaded) {
+      this.setState({
+        allLoaded: true
+      });
+    }
   }
 
   handleAddTodo(todoName, todoDesription, picture) {
@@ -46,30 +46,37 @@ class App extends Component {
   }
 
   handleAllTodos() {
-    this.props.loadAll();
-    this.setState({showButton: false});
+    this.setState({allLoaded: true});
+  }
+
+  handleTodosCount() {
+    const {todos} = this.props;
+    const {allLoaded} = this.state;
+    if (todos && todos.length > LIMIT && !allLoaded) {
+      return todos.slice(0, LIMIT);
+    }
+    return todos;
+    debugger;
   }
 
   getLoadAllButton () {
-    const {todos} = this.props;
-    const {showButton} = this.state;
-    const isTodosLoaded = todos && todos.length;
-    if (isTodosLoaded && showButton) return <Button color="success" onClick={this.handleAllTodos}>Load All</Button>;
+    const {allLoaded} = this.state;
+    if (!allLoaded) return <Button color="success" onClick={this.handleAllTodos}>Load All</Button>;
+  }
+
+  getTodosList() {
+    const {isLoading} = this.props;
+    const todos = this.handleTodosCount();
+    return isLoading
+      ? <Spinner/>
+      : <TodoList todoList={todos} deleteTodo={this.handleDeleteTodo}/>
   }
 
   render() {
-    let {todos} = this.props;
-    let list = null;
-    if (todos && todos.length) {
-      list = <TodoList todoList={this.props.todos} checkTodo={this.handleCheckTodo} deleteTodo={this.handleDeleteTodo} />
-    } else {
-      list = <Spinner />
-    }
-
     return (
       <div className={styles.App}>
         <AddTodo addNewTodo={this.handleAddTodo} />
-        {list}
+        {this.getTodosList()}
         {this.getLoadAllButton()}
       </div>
     );
@@ -79,7 +86,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     todos: state.todos,
-    load: state.loadAllTodo
+    isLoading: state.isLoading
   }
 }
 
@@ -88,7 +95,6 @@ const mapDispatchToProps = (dispatch) => {
     loadTodos: () => dispatch (actionCreators.loadDbTodos()),
     deleteToDo: (id, index) => dispatch (actionCreators.removeDbTodo(id, index)),
     addTodo: (todoName, todoDesription, picture) => dispatch(actionCreators.addDbTodo(todoName, todoDesription, picture)),
-    loadAll: () => dispatch (actionCreators.loadAllTodo())
   }
 }
 

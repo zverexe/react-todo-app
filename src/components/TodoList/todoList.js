@@ -4,14 +4,19 @@ import { Container, Col } from 'reactstrap';
 import styles from './todoList.scss';
 
 const todoList = (props) => {
-  const todoItem = props.todoList.map((todo, index) => {
-    return (<Todo todo={todo} check = {props.checkTodo} key={todo.id} todoIndex = {index} delete = {props.deleteTodo}/>)
+
+  const {todoList} = props;
+  let todoItems;
+  if (todoList && todoList.length) {
+    todoItems = props.todoList.map((todo) => {
+      return (<Todo todo={todo} key={todo.id} delete = {props.deleteTodo}/>)
     });
+  }
     return (
         <Container>
           <Col sm="12">
             <div className={styles.todo_list}>
-                {todoItem}
+                {todoItems}
             </div>
           </Col>
         </Container>
