@@ -5,7 +5,7 @@ const storageRef = firebase.storage.ref();
 
 const images = timestamp => storageRef.child(`image/${timestamp}`);
 
-/*export const apiAddTodo = async (todoName, todoDesription, picture) => {
+export const apiAddTodo = async (todoName, todoDesription, picture) => {
     const todo = {
       name: todoName,
       body: todoDesription,
@@ -18,9 +18,9 @@ const images = timestamp => storageRef.child(`image/${timestamp}`);
     }
 
     return db.push(todo);
-};*/
+};
 
-export const apiAddTodo =  (todoName, todoDesription, picture) => {
+/*export const apiAddTodo =  (todoName, todoDesription, picture) => {
   return new Promise( (res) => {
     const todo = {
       name: todoName,
@@ -34,7 +34,7 @@ export const apiAddTodo =  (todoName, todoDesription, picture) => {
   }
   res(db.push(todo));
   });
-};
+};*/
 
 export const apiRemoveTodo = (id) => {
   return db.child(id).remove();
