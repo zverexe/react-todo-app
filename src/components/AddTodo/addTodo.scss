@@ -1,4 +1,4 @@
-.add_todo_wrapper{
+.add-todo-wrapper{
   display: flex;
   justify-content: center;
   width: 100%;
@@ -12,7 +12,7 @@
 }
 
 @media (max-width: 767px) {
-  .add_todo_wrapper{
+  .add-todo-wrapper{
     .newPost{
       width: 100%;
     }

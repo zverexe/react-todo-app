@@ -3,7 +3,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 
-import styles from './App.scss';
+import './App.scss';
 
 import AddTodo from '../components/AddTodo/addTodo';
 import TodoList from '../components/TodoList/todoList';
@@ -74,7 +74,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className={styles.App}>
+      <div className="App">
         <AddTodo addNewTodo={this.handleAddTodo} />
         {this.getTodosList()}
         {this.getLoadAllButton()}

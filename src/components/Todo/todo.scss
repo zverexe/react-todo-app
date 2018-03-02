@@ -1,5 +1,5 @@
-.card_wrapper {
-  .card_item{
+.card-wrapper {
+  .card-item{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,13 +25,13 @@
   }  
 }
 
-.disabled_todo{
+.disabled-todo{
   background-color: #ccc;
 }
 
 @media (max-width: 767px) {
-  .card_wrapper{
-    .card_item{
+  .card-wrapper{
+    .card-item{
       img{
         height: auto;
         width: 100%;

@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './spinner.scss';
+import './spinner.scss';
 
 const spinner = () => {
   return(
-    <div className={styles.loader_wrapper}>
-      <div id={styles.loader}>
-        <div id={styles.box}></div>
-        <div id={styles.hill}></div>
+    <div className="loader-wrapper">
+      <div id="loader">
+        <div id="box"></div>
+        <div id="hill"></div>
       </div>
     </div>
   )

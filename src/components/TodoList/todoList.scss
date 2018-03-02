@@ -1,4 +1,4 @@
-.todo_list {
+.todo-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 10px;
@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 767px) {
-  .todo_list {
+  .todo-list {
     grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
   }
 }

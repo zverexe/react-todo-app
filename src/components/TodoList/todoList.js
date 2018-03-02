@@ -1,7 +1,7 @@
 import React from 'react';
 import Todo from '../Todo/todo';
 import { Container, Col } from 'reactstrap';
-import styles from './todoList.scss';
+import './todoList.scss';
 
 const todoList = (props) => {
 
@@ -15,7 +15,7 @@ const todoList = (props) => {
     return (
         <Container>
           <Col sm="12">
-            <div className={styles.todo_list}>
+            <div className="todo-list">
                 {todoItems}
             </div>
           </Col>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Col, Container, Form} from 'reactstrap';
 
-import styles from './addTodo.scss';
+import './addTodo.scss';
 
 const addTodo = (props) => {
   let nameInput;
@@ -14,15 +14,14 @@ const addTodo = (props) => {
     nameInput.value = null;
     descriptionInput.value = null;
     imageRef.value = null;
-    debugger;
   };
 
   return (
     <Container>
       <Col sm="12">
-        <div className={styles.add_todo_wrapper}>
+        <div className="add-todo-wrapper">
           <h3>Add Todo</h3>
-          <Form className={styles.newPost}>
+          <Form className="newPost">
             <div className="form-group">
               <label htmlFor="exampleInputPassword1">Todo title</label>
               <input type="text"
