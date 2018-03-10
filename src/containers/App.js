@@ -56,7 +56,10 @@ class App extends Component {
       return todos.slice(0, LIMIT);
     }
     return todos;
-    debugger;
+  }
+
+  handleCheckTodo(todo) {
+    this.props.checkTodo(todo);
   }
 
   getLoadAllButton () {
@@ -69,7 +72,7 @@ class App extends Component {
     const todos = this.handleTodosCount();
     return isLoading
       ? <Spinner/>
-      : <TodoList todoList={todos} deleteTodo={this.handleDeleteTodo}/>
+      : <TodoList todoList={todos} deleteTodo={this.handleDeleteTodo} check={this.handleCheckTodo}/>
   }
 
   render() {
@@ -95,6 +98,7 @@ const mapDispatchToProps = (dispatch) => {
     loadTodos: () => dispatch (actionCreators.loadDbTodos()),
     deleteToDo: (id, index) => dispatch (actionCreators.removeDbTodo(id, index)),
     addTodo: (todoName, todoDesription, picture) => dispatch(actionCreators.addDbTodo(todoName, todoDesription, picture)),
+    checkTodo: (todo) => dispatch(actionCreators.checkTodo(todo)),
   }
 }
 

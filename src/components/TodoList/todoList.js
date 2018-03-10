@@ -9,7 +9,7 @@ const todoList = (props) => {
   let todoItems;
   if (todoList && todoList.length) {
     todoItems = props.todoList.map((todo) => {
-      return (<Todo todo={todo} key={todo.id} delete = {props.deleteTodo}/>)
+      return (<Todo todo={todo} key={todo.id} delete = {props.deleteTodo} checkTodo={props.check}/>)
     });
   }
     return (

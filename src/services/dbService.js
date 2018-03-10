@@ -5,7 +5,7 @@ const storageRef = firebase.storage.ref();
 
 const images = timestamp => storageRef.child(`image/${timestamp}`);
 
-export const apiAddTodo = async (todoName, todoDesription, picture) => {
+/*export const apiAddTodo = async (todoName, todoDesription, picture) => {
     const todo = {
       name: todoName,
       body: todoDesription,
@@ -18,27 +18,35 @@ export const apiAddTodo = async (todoName, todoDesription, picture) => {
     }
 
     return db.push(todo);
-};
-
-/*export const apiAddTodo =  (todoName, todoDesription, picture) => {
-  return new Promise( (res) => {
-    const todo = {
-      name: todoName,
-      body: todoDesription,
-      status: false
-    };
-    if (picture) {
-        images(new Date().getTime()).put(picture).then( snapshot => {
-        todo.image = snapshot.metadata.downloadURLs;
-     });
-  }
-  res(db.push(todo));
-  });
 };*/
+
+export const apiAddTodo =  (todoName, todoDesription, picture) => {
+  const todo = {
+    name: todoName,
+    body: todoDesription,
+    status: false
+  };
+  if (picture) {
+    return images(new Date().getTime()).put(picture).then( snapshot => {
+      todo.image = snapshot.metadata.downloadURLs;
+      return db.push(todo);
+     });
+  } else {
+    return db.push(todo);
+  }
+};
 
 export const apiRemoveTodo = (id) => {
   return db.child(id).remove();
 };
+
+export const apiCheckTodo = (todo) => {
+const dbItemRef = firebase.database.ref().child('todos/' + todo.id);
+  const newTodo = {
+    status: todo.status ? todo.status = false : todo.status = true
+  };
+  return dbItemRef.update(newTodo);
+}
 
 export const loadTodosList = () => {
   return new Promise((res) => {

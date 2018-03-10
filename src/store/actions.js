@@ -1,7 +1,8 @@
 import {
   apiAddTodo,
   apiRemoveTodo,
-  loadTodosList
+  loadTodosList,
+  apiCheckTodo
 } from '../services/dbService';
 
 export const INIT_TODOS = 'INIT_TODOS';
@@ -40,3 +41,9 @@ export const removeDbTodo = (id) => dispatch => {
     dispatch(loadDbTodos());
   });
 };
+
+export const checkTodo = (todo) => dispatch => {
+  apiCheckTodo(todo).then(() => {
+    dispatch(loadDbTodos());
+  });
+}
